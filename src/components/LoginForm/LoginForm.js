@@ -3,6 +3,7 @@ import axios from 'axios';
 import './LoginForm.css';
 import {API_BASE_URL} from '../../constants/apiConstants';
 import { withRouter } from "react-router-dom";
+//import  { Redirect } from 'react-router-dom';
 
 function LoginForm(props) {
     const [state , setState] = useState({
@@ -36,9 +37,9 @@ function LoginForm(props) {
                 }
                 else if(response.data.code === 204){
                     props.showError("Username and password do not match");
-                }
+               }
                 else{
-                    props.showError("Username does not exists");
+                   props.showError("Username does not exists");
                 }
             })
             .catch(function (error) {
@@ -66,7 +67,7 @@ function LoginForm(props) {
                        value={state.email}
                        onChange={handleChange}
                 />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                
                 </div>
                 <div className="form-group text-left">
                 <label htmlFor="exampleInputPassword1">Password</label>
@@ -83,7 +84,8 @@ function LoginForm(props) {
                 <button 
                     type="submit" 
                     className="btn btn-primary"
-                    onClick={handleSubmitClick}
+                    onClick={handleSubmitClick} 
+                    //onClick={() => redirectToRegister()}
                 >Submit</button>
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">

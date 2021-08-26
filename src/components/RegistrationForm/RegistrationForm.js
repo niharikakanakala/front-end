@@ -20,7 +20,7 @@ function RegistrationForm(props) {
     }
     const sendDetailsToServer = () => {
         if(state.email.length && state.password.length) {
-            props.showError(null);
+            //props.showError(null);
             const payload={
                 "username":state.username,
                 "email":state.email,
@@ -60,7 +60,7 @@ function RegistrationForm(props) {
         if(state.password === state.confirmPassword) {
             sendDetailsToServer()    
         } else {
-            props.showError('Passwords do not match');
+            alert('Passwords do not match');
         }
     }
     return(
@@ -86,7 +86,7 @@ function RegistrationForm(props) {
                        value={state.email}
                        onChange={handleChange}
                 />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+               
                 </div>
                 <div className="form-group text-left">
                     <label htmlFor="exampleInputPassword1">Password</label>
@@ -109,6 +109,7 @@ function RegistrationForm(props) {
                     />
                 </div>
                 <button 
+                
                     type="submit" 
                     className="btn btn-primary"
                     onClick={handleSubmitClick}
