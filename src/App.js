@@ -11,8 +11,10 @@ import {
   Route
 } from "react-router-dom";
 
+
 function App() {
   const [title, updateTitle] = useState(null);
+  //const [errorMessage, updateErrorMessage] = useState(null);
   return (
     <Router>
     <div className="App">
@@ -20,22 +22,22 @@ function App() {
         <div className="container d-flex align-items-center flex-column">
           <Switch>
             <Route path="/" exact={true}>
-              <RegistrationForm  updateTitle={updateTitle}/>
+            <RegistrationForm  updateTitle={updateTitle}/>
             </Route>
 
             <Route path="/register">
-              <RegistrationForm updateTitle={updateTitle}/>
+            <RegistrationForm  updateTitle={updateTitle}/>
               </Route>
 
             <Route path="/login">
-               <LoginForm  updateTitle={updateTitle}/>
+            <LoginForm  updateTitle={updateTitle}/>
               </Route>
 
             <Route path="/home">
               <Home/>
             </Route>
           </Switch>
-          
+         
         </div>
     </div>
     </Router>
