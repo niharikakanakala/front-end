@@ -18,6 +18,15 @@ function LoginForm(props) {
             [id] : value
         }))
     }
+    const redirectToHome = () => {
+        props.updateTitle('Home')
+        props.history.push('/home');
+    }
+    
+    const redirectToRegister = () => {
+        props.history.push('/register'); 
+        props.updateTitle('Register');
+    }
 
     const handleSubmitClick = (e) => {
         e.preventDefault();
@@ -27,7 +36,8 @@ function LoginForm(props) {
         }
         axios.post(API_BASE_URL+'signin', payload)
             .then(function (response) {
-                if(response.data.code === 200){
+                console.log(`response: ${JSON.stringify(response)}`);
+                if(response.status === 200){
                     setState(prevState => ({
                         ...prevState,
                         'successMessage' : 'Login successful. Redirecting to home page..'
@@ -35,7 +45,7 @@ function LoginForm(props) {
                     redirectToHome();
                     props.showError(null)
                 }
-                else if(response.data.code === 204){
+                else if(response.status === 204){
                     props.showError("Username and password do not match");
                }
                 else{
@@ -46,14 +56,7 @@ function LoginForm(props) {
                 console.log(error);
             });
     }
-    const redirectToHome = () => {
-        props.updateTitle('Home')
-        props.history.push('/home');
-    }
-    const redirectToRegister = () => {
-        props.history.push('/register'); 
-        props.updateTitle('Register');
-    }
+    
     return(
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
@@ -85,8 +88,8 @@ function LoginForm(props) {
                     type="submit" 
                     className="btn btn-primary"
                     onClick={handleSubmitClick} 
-                    //onClick={() => redirectToRegister()}
-                >Submit</button>
+                    ///onClick={() => redirectToHome()}
+                ><span onClick={() => redirectToHome()}>Submit</span></button>
             </form>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
